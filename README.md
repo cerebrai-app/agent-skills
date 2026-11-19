@@ -12,7 +12,9 @@ with a `.brain/` directory for its configuration.
 ## Requirements
 
 - [`brainctl`](https://github.com/cerebrai-app/go-cerebrai) on your `PATH`:
-  `brew install --cask cerebrai-app/tap/brainctl` or `scoop install cerebrai/brainctl`.
+  `brew install --cask cerebrai-app/tap/brainctl` (macOS and Linux), or on Windows
+  `scoop bucket add cerebrai https://github.com/cerebrai-app/scoop-bucket` then
+  `scoop install cerebrai/brainctl`.
 
 ## Install
 
@@ -40,4 +42,18 @@ Installed this way it is invoked as `/brain-setup`.
 
 ## Getting started
 
-In the directory for your vault, run `brain-setup`.
+In the directory for your vault, run `/brain:brain-setup` (Claude Code) or `/brain-setup` (other
+agents).
+
+## Repository automation
+
+The workflows in [`.github/workflows/`](.github/workflows) call the shared actions in
+[cerebrai-app/actions](https://github.com/cerebrai-app/actions): `claude.yml` (answers `@claude`
+mentions), `claude-code-review.yml` (reviews every PR), `release-notes.yml` (writes release notes
+for each `vX.Y.Z` tag; its `about` input describes the repo) and `renovate.yml` (weekly Renovate,
+configured by [`renovate.json`](renovate.json)). They need these secrets at the repository or
+organization level:
+
+- `CLAUDE_CODE_OAUTH_TOKEN` — for the Claude workflows, release notes included.
+- `RENOVATE_APP_CLIENT_ID`, `RENOVATE_APP_PRIVATE_KEY` — for Renovate. Until they exist the job
+  only prints a warning.
