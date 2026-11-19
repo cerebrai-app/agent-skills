@@ -65,7 +65,7 @@ jobs:
           rewrite: ${{ github.event_name == 'workflow_dispatch' }}
           # Optional: what this repository is and who reads its releases, to
           # steer the notes. Empty points Claude at the README.
-          about: ''
+          about: 'Agent skills for the cerebrai Second Brain, installed through the Claude Code marketplace or the skills CLI, read by people who use brainctl.'
 
   publish:
     name: Publish notes
